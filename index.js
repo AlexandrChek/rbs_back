@@ -2,11 +2,11 @@ import http from 'http'
 import {getStars, search} from './functions.js'
 
 const server = http.createServer((req, res) => {
-    const origin = req.headers.origin
+    const origin = 'https://alexandrchek.github.io'
 
     if(req.method === 'OPTIONS') {
         res.writeHead(200, {
-            'Access-Control-Allow-Origin': origin,
+            'Access-Control-Allow-Origin': origin || '*',
             'Access-Control-Allow-Methods': 'POST, GET',
             'Access-Control-Allow-Headers': 'Content-Type'
         })
@@ -18,7 +18,7 @@ const server = http.createServer((req, res) => {
         const result = JSON.stringify(getStars())
         res.writeHead(200, {
             'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': origin
+            'Access-Control-Allow-Origin': origin || '*'
         })
         res.end(result)
     }
@@ -30,7 +30,7 @@ const server = http.createServer((req, res) => {
             const result = JSON.stringify(search(request))
             res.writeHead(200, {
                 'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': origin
+                'Access-Control-Allow-Origin': origin || '*'
             })
             res.end(result)
         })
