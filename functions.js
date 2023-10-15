@@ -6,40 +6,25 @@ const creatures = JSON.parse(creaturesJson).creatures
 export function getStars() {
     let result = []
     stars.forEach(star => {
-        let starItem = creatures.filter(creature => creature.name == star)
-        result.push(starItem[0])
+        let starItem = creatures.find(item => item.name === star.name)
+        starItem.cover = star.cover
+        result.push(starItem)
     })
     return result
 }
 
 export function search(request) {
-    let suitables = creatures.filter(creature => {
-        creature.name.toLowerCase().includes(request.toLowerCase())
+    const suitable = creatures.find(item => 
+        item.name.toLowerCase() === request.toLowerCase()
+    )
+    return suitable
+}
+
+export function getList() {
+    let names = []
+    creatures.forEach(creature => {
+        names.push(creature.name)
     })
-
-    if(request.trim().includes(' ')) {
-        let suitableNames = []
-
-        if(suitables.length) {
-            suitables.forEach(creature => {
-                suitableNames.push(creature.name.toLowerCase())
-            })
-        }
-
-        const words = request.trim().replaceAll(',', '').toLowerCase().split(' ')
-        words.forEach(word => {
-            let partlySuitable = creatures.filter(creature => {
-                creature.name.toLowerCase().includes(word) && !suitableNames.includes(creature.name.toLowerCase())
-            })
-
-            if(partlySuitable.length) {
-                partlySuitable.forEach(creature => {
-                    suitableNames.push(creature.name.toLowerCase())
-                })
-                suitables = [...suitables, ...partlySuitable]
-            }
-        })
-    }
-
-    return suitables
+    names.sort()
+    return names
 }
