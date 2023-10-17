@@ -17,6 +17,7 @@ const server = http.createServer((req, res) => {
 
     if(req.method === 'POST') {
         let request = ''
+        
         req.on('data', chank => request += chank)
         req.on('end', () => {
             let result = ''
