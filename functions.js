@@ -6,7 +6,7 @@ const creatures = JSON.parse(creaturesJson).creatures
 export function getStars() {
     let result = []
     stars.forEach(star => {
-        let starItem = creatures.find(item => item.name === star.name)
+        let starItem = creatures.find(item => item.id === star.id)
         starItem.cover = star.cover
         result.push(starItem)
     })
