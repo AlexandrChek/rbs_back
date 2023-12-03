@@ -24,7 +24,7 @@ const server = http.createServer((req, res) => {
             let result = ''
 
             if(request === '/stars') {
-                result = JSON.stringify(stars())
+                result = JSON.stringify(stars)
             } else if(request === '/search') {
                 result = JSON.stringify(getList())
             } else {
