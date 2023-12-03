@@ -1,5 +1,6 @@
 import http from 'http'
-import {getStars, search, getList} from './functions.js'
+import {stars} from './constants.js'
+import {search, getList} from './functions.js'
 
 const server = http.createServer((req, res) => {
     const origin = 'http://localhost:8080'
@@ -17,13 +18,13 @@ const server = http.createServer((req, res) => {
 
     if(req.method === 'POST') {
         let request = ''
-        
         req.on('data', chank => request += chank)
+
         req.on('end', () => {
             let result = ''
 
             if(request === '/stars') {
-                result = JSON.stringify(getStars())
+                result = JSON.stringify(stars())
             } else if(request === '/search') {
                 result = JSON.stringify(getList())
             } else {
