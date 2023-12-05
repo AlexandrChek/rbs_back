@@ -3,7 +3,7 @@ import {stars} from './constants.js'
 import {search, getList} from './functions.js'
 
 const server = http.createServer((req, res) => {
-    const origin = 'http://localhost:8080'
+    const origin = req.headers.origin
     //'https://alexandrchek.github.io' - github account
 
     if(req.method === 'OPTIONS') {
