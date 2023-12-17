@@ -10,13 +10,23 @@ export function getList() {
             name: creature.name
         })
     })
-    names.sort()
     return names
 }
 
 export function search(request) {
-    const suitable = creatures.find(item => 
-        item.id === Number(request)
+    const suitable = creatures.find(creature => 
+        creature.id === Number(request)
     )
     return suitable
+}
+
+export function getClasses() {
+    const allClasses = []
+    creatures.forEach(creature =>
+        allClasses.push(creature.class)    
+    )
+
+    const classes = [...new Set(allClasses)]
+
+    return classes
 }

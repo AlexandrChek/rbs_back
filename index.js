@@ -27,6 +27,8 @@ const server = http.createServer((req, res) => {
                 result = JSON.stringify(stars)
             } else if(request === '/search') {
                 result = JSON.stringify(getList())
+            } else if(request === 'getClasses') {
+                result = JSON.stringify(getClasses())
             } else {
                 result = JSON.stringify(search(request))
             }
