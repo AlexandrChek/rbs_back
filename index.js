@@ -1,6 +1,6 @@
 import http from 'http'
 import {stars} from './constants.js'
-import {search, getList} from './functions.js'
+import {search, getList, getClasses} from './functions.js'
 
 const server = http.createServer((req, res) => {
     const origin = req.headers.origin
