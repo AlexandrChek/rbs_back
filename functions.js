@@ -21,7 +21,7 @@ export function search(request) {
 }
 
 export function getClasses() {
-    const allClasses = []
+    let allClasses = []
     creatures.forEach(creature =>
         allClasses.push(creature.class)    
     )
@@ -29,4 +29,12 @@ export function getClasses() {
     const classes = [...new Set(allClasses)]
 
     return classes
+}
+
+export function filterByClass(animalClass) {
+    let suitables = creatures.filter(creature => {
+        return creature.class === animalClass
+    })
+
+   return suitables
 }
