@@ -1,6 +1,6 @@
 import http from 'http'
 import {stars} from './constants.js'
-import {getList, getClasses, filterByClass} from './functions.js'
+import {searchById, getList, getClasses, filterByClass} from './functions.js'
 
 const server = http.createServer((req, res) => {
     const origin = req.headers.origin
@@ -30,8 +30,9 @@ const server = http.createServer((req, res) => {
             } else if(request === 'getClasses') {
                 result = JSON.stringify(getClasses())
             } else if(request.startsWith('filterByClass')) {
-                const animalClass = request.slice(14)
-                result = JSON.stringify(filterByClass(animalClass))
+                result = JSON.stringify(filterByClass(request))
+            } else {
+                result = JSON.stringify(searchById(request))
             }
 
             res.writeHead(200, {
