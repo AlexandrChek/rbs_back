@@ -13,13 +13,6 @@ export function getList() {
     return names
 }
 
-export function search(request) {
-    const suitable = creatures.find(creature => 
-        creature.id === Number(request)
-    )
-    return suitable
-}
-
 export function getClasses() {
     let allClasses = []
     creatures.forEach(creature =>
@@ -35,6 +28,5 @@ export function filterByClass(animalClass) {
     let suitables = creatures.filter(creature => {
         return creature.class === animalClass
     })
-
    return suitables
 }
