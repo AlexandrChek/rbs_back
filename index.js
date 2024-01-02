@@ -4,7 +4,6 @@ import {searchById, getList, getClasses, filterByClass} from './functions.js'
 
 const server = http.createServer((req, res) => {
     const origin = req.headers.origin
-    //'https://alexandrchek.github.io' - github account
 
     if(req.method === 'OPTIONS') {
         res.writeHead(200, {
