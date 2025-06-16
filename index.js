@@ -9,13 +9,13 @@ const app = express()
 app.use(cors())
 app.use(express.json())
 
-app.get('/stars', (req, res) => {
+app.get('/api/stars', (req, res) => {
     res.status(200).json(stars)
 })
-app.get('/names_and_ids', getList)
-app.get('/classes', getClasses)
-app.get('/filter_by_class/:classname', filterByClass)
-app.get('/creature/:id', searchById)
+app.get('/api/names_and_ids', getList)
+app.get('/api/classes', getClasses)
+app.get('/api/filter_by_class/:classname', filterByClass)
+app.get('/api/creature/:id', searchById)
 
 app.listen(PORT, '0.0.0.0', () => {
     console.log(`Server started on port ${PORT}`)
