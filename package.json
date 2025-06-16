@@ -1,6 +1,9 @@
 {
   "name": "rbs_back",
   "version": "1.0.0",
+  "engines": {
+    "node": "18.x"
+  },
   "type": "module",
   "description": "",
   "main": "index.js",
@@ -8,5 +11,9 @@
     "start": "node index.js"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^5.1.0"
+  }
 }

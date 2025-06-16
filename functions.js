@@ -2,25 +2,17 @@ import fs from 'fs'
 const creaturesJson = fs.readFileSync('./creatures.json', 'utf-8')
 const creatures = JSON.parse(creaturesJson).creatures
 
-export function searchById(request) {
-    const requiredItem = creatures.find(creature => {
-        return creature.id === Number(request)
-    })
-    return requiredItem
-}
-
-export function getList() {
+export function getList(req, res) {
     let names = []
     creatures.forEach(creature => {
-        names.push({
-            id: creature.id,
-            name: creature.name
-        })
+        const { id, name } = creature
+        names.push({id, name})
     })
-    return names
+    
+    res.status(200).json(names)
 }
 
-export function getClasses() {
+export function getClasses(req, res) {
     let allClasses = []
     creatures.forEach(creature =>
         allClasses.push(creature.class)    
@@ -28,13 +20,19 @@ export function getClasses() {
 
     const classes = [...new Set(allClasses)]
 
-    return classes
+    res.status(200).json(classes)
 }
 
-export function filterByClass(request) {
-    const animalClass = request.slice(14)
-    const suitables = creatures.filter(creature => {
-        return creature.class === animalClass
-    })
-   return suitables
+export function filterByClass(req, res) {
+    const {classname} = req.params
+    const suitables = creatures.filter(creature => creature.class === classname)
+    
+    res.status(200).json(suitables)
+}
+
+export function searchById(req, res) {
+    const {id} = req.params
+    const requiredItem = creatures.find(creature => creature.id === Number(id))
+    
+    res.status(200).json(requiredItem)
 }

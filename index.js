@@ -1,48 +1,22 @@
-import http from 'http'
+import express from 'express'
+import cors from 'cors'
 import {stars} from './constants.js'
-import {searchById, getList, getClasses, filterByClass} from './functions.js'
+import { getList, getClasses, filterByClass, searchById } from './functions.js'
 
-const server = http.createServer((req, res) => {
-    const origin = req.headers.origin
+const PORT = process.env.PORT || 3000
+const app = express()
 
-    if(req.method === 'OPTIONS') {
-        res.writeHead(200, {
-            'Access-Control-Allow-Origin': origin,
-            'Access-Control-Allow-Methods': 'POST, GET',
-            'Access-Control-Allow-Headers': 'Content-Type'
-        })
-        res.end()
-        return
-    }
+app.use(cors())
+app.use(express.json())
 
-    if(req.method === 'POST') {
-        let request = ''
-        req.on('data', chank => request += chank)
-
-        req.on('end', () => {
-            let result = ''
-
-            if(request === '/stars') {
-                result = JSON.stringify(stars)
-            } else if(request === '/search') {
-                result = JSON.stringify(getList())
-            } else if(request === 'getClasses') {
-                result = JSON.stringify(getClasses())
-            } else if(request.startsWith('filterByClass')) {
-                result = JSON.stringify(filterByClass(request))
-            } else {
-                result = JSON.stringify(searchById(request))
-            }
-
-            res.writeHead(200, {
-                'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': origin
-            })
-            res.end(result)
-        })
-    }
+app.get('/stars', (req, res) => {
+    res.status(200).json(stars)
 })
+app.get('/names_and_ids', getList)
+app.get('/classes', getClasses)
+app.get('/filter_by_class/:classname', filterByClass)
+app.get('/creature/:id', searchById)
 
-server.listen(3000, 'localhost', () => {
-    console.log('The server is on')
+app.listen(PORT, '0.0.0.0', () => {
+    console.log(`Server started on port ${PORT}`)
 })
