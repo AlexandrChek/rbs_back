@@ -1,4 +1,4 @@
-import creatures from './creatures'
+import creatures from './creatures.js'
 
 export function getList(req, res) {
     let names = []
