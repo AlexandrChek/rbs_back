@@ -1,4 +1,4 @@
-export default creatures = [
+export const creatures = [
     {
         id: 1,
         class: "Mammals",

@@ -1,7 +1,7 @@
 import express from 'express'
 import cors from 'cors'
 import { stars } from './constants.js'
-import creatures from './creatures.js'
+import {creatures} from './creatures.js'
 import { getList, getClasses, filterByClass, searchById } from './functions.js'
 
 const PORT = process.env.PORT || 3000
