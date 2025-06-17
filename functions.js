@@ -1,4 +1,6 @@
-export function getList(res, creatures) {
+import { creatures } from './creatures.js'
+
+export function getList(req, res) {
     let names = []
     creatures.forEach(creature => {
         const { id, name } = creature
@@ -8,7 +10,7 @@ export function getList(res, creatures) {
     res.status(200).json(names)
 }
 
-export function getClasses(res, creatures) {
+export function getClasses(req, res) {
     let allClasses = []
     creatures.forEach(creature =>
         allClasses.push(creature.class)    
@@ -19,14 +21,14 @@ export function getClasses(res, creatures) {
     res.status(200).json(classes)
 }
 
-export function filterByClass(req, res, creatures) {
+export function filterByClass(req, res) {
     const {classname} = req.params
     const suitables = creatures.filter(creature => creature.class === classname)
     
     res.status(200).json(suitables)
 }
 
-export function searchById(req, res, creatures) {
+export function searchById(req, res) {
     const {id} = req.params
     const requiredItem = creatures.find(creature => creature.id === Number(id))
     
