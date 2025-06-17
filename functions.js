@@ -1,6 +1,4 @@
-import fs from 'fs'
-const creaturesJson = fs.readFileSync('./creatures.json', 'utf-8')
-const creatures = JSON.parse(creaturesJson).creatures
+import creatures from './creatures'
 
 export function getList(req, res) {
     let names = []
